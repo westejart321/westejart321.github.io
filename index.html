@@ -9,7 +9,17 @@
             <g></g>
         </svg>
 <script>
-//activate Web Server for Chrome to get past
+
+d3.csv("pumps.csv", function(data) {
+    var pumpData = data[0];
+    var pumpLocation = [];
+    for(var i=0; i<data.length; i++){
+        var val = pumpData[i];
+        pumpLocation.push(+val)
+    }
+    drawPumps();
+})
+
 function drawPumps() {
     var selection = d3.select('svg').select('g').selectAll('circle').data(pumpLocation);
     var circles = selection.enter().append('circle');
@@ -27,16 +37,6 @@ function drawPumps() {
         return radius;
     })
 }
-
-d3.csv("pumps.csv", function(data) {
-    var pumpData = data[0];
-    var pumpLocation = [];
-    for(var i=0; i<data.length; i++){
-        var val = pumpData[i];
-        pumpLocation.push(+val)
-    }
-    drawPumps();
-})
 
 
 </script>
